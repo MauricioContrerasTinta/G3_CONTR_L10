@@ -128,4 +128,25 @@ public class BTree<E extends Comparable<E>> {
         }
         return sb.toString();
     }
+
+    public boolean search(E cl) {
+    return search(this.root, cl);
+}
+
+    private boolean search(BNode<E> current, E cl) {
+        if (current == null) {
+            return false;
+        }
+
+        int[] pos = new int[1];
+        boolean found = current.searchNode(cl, pos);
+
+        if (found) {
+            System.out.println("Clave encontrada en el nodo con idNode = " + current.idNode + 
+                            ", en la posición = " + pos[0]);
+            return true;
+        } else {
+            return search(current.childs.get(pos[0]), cl);
+        }
+    }
 }

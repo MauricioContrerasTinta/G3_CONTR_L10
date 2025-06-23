@@ -5,7 +5,7 @@ public class BNode<E extends Comparable<E>> {
     protected ArrayList<BNode<E>> childs;
     protected int count;
     private static int nextId = 0;
-    private int idNode;
+    protected int idNode;
 
     public BNode(int n){
         this.keys = new ArrayList<E>(n);
@@ -17,12 +17,15 @@ public class BNode<E extends Comparable<E>> {
         }
         this.idNode = nextId++;
     }
+
     public boolean nodeFull() {
         return count == keys.size();
     }
+
     public boolean nodeEmpty() {
         return count == 0;
     }
+
     public boolean searchNode(E key, int[] pos) {
         int i = 0;
         while (i < count && key.compareTo(keys.get(i)) > 0) {
@@ -36,6 +39,11 @@ public class BNode<E extends Comparable<E>> {
             return false;
         }
     }
+
+    public int getIdNode() {
+        return idNode;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Node ").append(idNode).append(": [");
