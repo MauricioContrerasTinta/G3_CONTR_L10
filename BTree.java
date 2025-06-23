@@ -92,4 +92,17 @@ public class BTree<E extends Comparable<E>> {
 
         return median;
     }
+
+    public void imprimirArbol(){
+        imprimirArbol(this.root, 0);
+    }
+
+    private void imprimirArbol(BNode<E> nodo, int nivel){
+        if(nodo != null){
+            System.out.println("Nivel " + nivel + ": " + nodo);
+            for (int i = 0; i <= nodo.count; i++) {
+                imprimirArbol(nodo.childs.get(i), nivel + 1);
+            }
+        }
+    }
 }
