@@ -18,5 +18,13 @@ public class BTree<E extends Comparable<E>> {
         E mediana;
         BNode<E> pnew;
         mediana = push(this.root, cl);
+        if(up){
+            pnew = new BNode<E>(this.orden);
+            pnew.count = 1;
+            pnew.keys.set(0, mediana);
+            pnew.childs.set(0, this.root);
+            pnew.childs.set(1, nDes);
+            this.root = pnew;
+        }
     }
 }
