@@ -105,4 +105,27 @@ public class BTree<E extends Comparable<E>> {
             }
         }
     }
+
+    @Override
+    public String toString(){
+        String s = "";
+        if (isEmpty()) {
+            s += "BTree is empty...";
+        } else {
+            s = writeTree(this.root, 0);
+        }
+        return s;
+    }
+
+    private String writeTree(BNode<E> current, int nivel) {
+        StringBuilder sb = new StringBuilder();
+
+        if (current != null) {
+            sb.append("Nivel ").append(nivel).append(" - Nodo ").append(current).append("\n");
+            for (int i = 0; i <= current.count; i++) {
+                sb.append(writeTree(current.childs.get(i), nivel + 1));
+            }
+        }
+        return sb.toString();
+    }
 }
