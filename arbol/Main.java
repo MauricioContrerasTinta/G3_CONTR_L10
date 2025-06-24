@@ -11,17 +11,17 @@ public class Main {
             System.out.println(arbol.toString());
 
             // Prueba de búsqueda
-            System.out.println("\n¿Existe 19?: " + arbol.search(19));
-            System.out.println("¿Existe 100?: " + arbol.search(100));
+            System.out.println("\n¿Existe 27?: " + arbol.search(27));
+            System.out.println("¿Existe 77?: " + arbol.search(77));
 
             // Prueba de inserción
-            arbol.insert(13);
-            System.out.println("\nDespues de insertar 13:");
+            arbol.insert(54);
+            System.out.println("\nDespues de insertar 54:");
             System.out.println(arbol);
 
             // Prueba de eliminación
-            arbol.remove(10);
-            System.out.println("\nDespués de eliminar 10:");
+            arbol.remove(45);
+            System.out.println("\nDespués de eliminar 45:");
             System.out.println(arbol);
 
         } catch (ItemNoFound e) {
