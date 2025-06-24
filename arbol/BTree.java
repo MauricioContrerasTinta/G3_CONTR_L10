@@ -379,5 +379,27 @@ public class BTree<E extends Comparable<E>> {
         }
     }
 
+    private static boolean verificarPropiedadesBTree(BNode<Integer> nodo, int orden) {
+        if (nodo == null) return true;
 
+        if (nodo.count > orden - 1) return false;
+        if (!esRaiz(nodo) && nodo.count < (orden / 2) - 1) return false;
+
+        for (int i = 0; i < nodo.count - 1; i++) {
+            if (nodo.keys.get(i) >= nodo.keys.get(i + 1)) return false;
+        }
+
+        for (int i = 0; i <= nodo.count; i++) {
+            BNode<Integer> hijo = nodo.childs.get(i);
+            if (hijo != null && !verificarPropiedadesBTree(hijo, orden)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean esRaiz(BNode<?> nodo) {
+        return nodo.getIdNode() == 0; // Asumiendo que el ID de la raíz es 0
+    }
 }
