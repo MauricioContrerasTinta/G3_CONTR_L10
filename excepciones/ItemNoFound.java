@@ -1,6 +1,7 @@
 package excepciones;
 
-public class ItemNotFound {
+
+public class ItemNoFound extends Exception {
     public ItemNoFound(String mensaje) {
         super(mensaje);
     }

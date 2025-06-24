@@ -1,4 +1,5 @@
 package arbol;
+
 import java.util.ArrayList;
 
 public class BNode<E extends Comparable<E>> {
