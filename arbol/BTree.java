@@ -313,7 +313,32 @@ public class BTree<E extends Comparable<E>> {
             String linea = lector.readLine();
             if (linea == null) throw new ItemNoFound("El archivo está vacío.");
 
-            
+            int orden = Integer.parseInt(linea.trim());
+            BTree<Integer> arbol = new BTree<>(orden);
+
+            while ((linea = lector.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+
+                String[] partes = linea.split(",");
+                if (partes.length < 3) throw new ItemNoFound("Línea mal formada: " + linea);
+
+                int nivel = Integer.parseInt(partes[0].trim());
+                int idNodo = Integer.parseInt(partes[1].trim());
+
+                BNode<Integer> nodo = new BNode<>(orden);
+                nodo.count = partes.length - 2;
+
+                for (int i = 2; i < partes.length; i++) {
+                    nodo.keys.set(i - 2, Integer.parseInt(partes[i].trim()));
+                }
+
+                nodo.idNode = idNodo;
+                nodosPorId.put(idNodo, nodo);
+                niveles.put(idNodo, nivel);
+
+                if (nivel == 0) {
+                    raiz = nodo;
+                }
             }
 
             if (raiz == null) throw new ItemNoFound("No se encontró el nodo raíz (nivel 0).");
