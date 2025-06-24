@@ -28,7 +28,7 @@ public class MainEstudiantes {
 
         arbol.insert(new RegistroEstudiante(106, "Sara"));
 
-
+        System.out.println("Buscar 106: " + arbol.buscarNombre(106));
     }
 }
 
