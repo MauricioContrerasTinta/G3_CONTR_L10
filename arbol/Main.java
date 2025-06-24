@@ -19,6 +19,11 @@ public class Main {
             System.out.println("\nDespues de insertar 13:");
             System.out.println(arbol);
 
+            // Prueba de eliminación
+            arbol.remove(10);
+            System.out.println("\nDespués de eliminar 10:");
+            System.out.println(arbol);
+
         }
     }
 }
