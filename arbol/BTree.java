@@ -309,6 +309,14 @@ public class BTree<E extends Comparable<E>> {
         Map<Integer, Integer> niveles = new HashMap<>();
         BNode<Integer> raiz = null;
 
-        
+        try (BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea = lector.readLine();
+            if (linea == null) throw new ItemNoFound("El archivo está vacío.");
+
+            
+            }
+
+            if (raiz == null) throw new ItemNoFound("No se encontró el nodo raíz (nivel 0).");
+
     }
 }
