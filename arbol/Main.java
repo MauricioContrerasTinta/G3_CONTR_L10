@@ -24,6 +24,10 @@ public class Main {
             System.out.println("\nDespués de eliminar 10:");
             System.out.println(arbol);
 
+        } catch (ItemNoFound e) {
+            System.err.println("Error al construir: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Otro error: " + e.getMessage());
         }
     }
 }
