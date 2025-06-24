@@ -253,4 +253,22 @@ public class BTree<E extends Comparable<E>> {
         parent.keys.set(index - 1, nodoIzquierdo.keys.get(nodoIzquierdo.count - 1));
         nodoIzquierdo.count--;
     }
+
+    private void prestadoDerecha(BNode<E> parent, int index) {
+        BNode<E> child = parent.childs.get(index);
+        BNode<E> nodoDerecha = parent.childs.get(index + 1);
+
+        child.keys.set(child.count, parent.keys.get(index));
+        child.childs.set(child.count + 1, nodoDerecha.childs.get(0));
+        child.count++;
+
+        parent.keys.set(index, nodoDerecha.keys.get(0));
+
+        for (int i = 0; i < nodoDerecha.count - 1; i++) {
+            nodoDerecha.keys.set(i, nodoDerecha.keys.get(i + 1));
+            nodoDerecha.childs.set(i, nodoDerecha.childs.get(i + 1));
+        }
+        nodoDerecha.childs.set(nodoDerecha.count - 1, nodoDerecha.childs.get(nodoDerecha.count));
+        nodoDerecha.count--;
+    }
 }
