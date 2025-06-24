@@ -149,4 +149,17 @@ public class BTree<E extends Comparable<E>> {
             return search(current.childs.get(pos[0]), cl);
         }
     }
+
+    public void remove(E cl) {
+        if (root != null) {
+            remove(root, cl);
+
+            // Si la raíz se quedó vacía y tiene hijos, se reduce la altura del árbol
+            if (root.count == 0 && root.childs.get(0) != null) {
+                root = root.childs.get(0);
+            } else if (root.count == 0) {
+                root = null;
+            }
+        }
+    }
 }
