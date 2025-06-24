@@ -14,6 +14,11 @@ public class Main {
             System.out.println("\n¿Existe 19?: " + arbol.search(19));
             System.out.println("¿Existe 100?: " + arbol.search(100));
 
+            // Prueba de inserción
+            arbol.insert(13);
+            System.out.println("\nDespues de insertar 13:");
+            System.out.println(arbol);
+
         }
     }
 }
