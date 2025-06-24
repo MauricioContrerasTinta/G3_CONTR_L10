@@ -222,4 +222,18 @@ public class BTree<E extends Comparable<E>> {
         while (!esHoja(node)) node = node.childs.get(0);
         return node.keys.get(0);
     }
+
+    private void fixChild(BNode<E> parent, int index) {
+        if (index > 0 && parent.childs.get(index - 1).count >= orden / 2) {
+            prestadoIzquierda(parent, index);
+        } else if (index < parent.count && parent.childs.get(index + 1).count >= orden / 2) {
+            prestadoDerecha(parent, index);
+        } else {
+            if (index > 0) {
+                merge(parent, index - 1);
+            } else {
+                merge(parent, index);
+            }
+        }
+    }    
 }
