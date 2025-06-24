@@ -208,4 +208,18 @@ public class BTree<E extends Comparable<E>> {
         }
         return true;
     }
+
+    private boolean esHoja(BNode<E> node) {
+        return node.childs.get(0) == null;
+    }
+
+    private E getPredecesor(BNode<E> node) {
+        while (!esHoja(node)) node = node.childs.get(node.count);
+        return node.keys.get(node.count - 1);
+    }
+
+    private E getSucesor(BNode<E> node) {
+        while (!esHoja(node)) node = node.childs.get(0);
+        return node.keys.get(0);
+    }
 }
