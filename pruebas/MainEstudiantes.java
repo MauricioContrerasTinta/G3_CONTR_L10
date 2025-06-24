@@ -19,6 +19,10 @@ public class MainEstudiantes {
         arbol.insert(new RegistroEstudiante(128, "Denis"));
         arbol.insert(new RegistroEstudiante(145, "Enrique"));
         arbol.insert(new RegistroEstudiante(122, "Karina"));
+
+        System.out.println("Buscar 115: " + arbol.buscarNombre(115)); 
+        System.out.println("Buscar 132: " + arbol.buscarNombre(132));  
+        System.out.println("Buscar 999: " + arbol.buscarNombre(999));  
     }
 }
 
