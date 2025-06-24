@@ -343,5 +343,41 @@ public class BTree<E extends Comparable<E>> {
 
             if (raiz == null) throw new ItemNoFound("No se encontró el nodo raíz (nivel 0).");
 
+            //asignar hijos a cada nodo padre según niveles
+            for (Map.Entry<Integer, BNode<Integer>> entrada : nodosPorId.entrySet()) {
+                int idPadre = entrada.getKey();
+                BNode<Integer> padre = entrada.getValue();
+                int nivelPadre = niveles.get(idPadre);
+                int hijosEsperados = padre.count + 1;
+
+                List<BNode<Integer>> hijos = new ArrayList<>();
+
+                for (Map.Entry<Integer, BNode<Integer>> posibleHijo : nodosPorId.entrySet()) {
+                    int idHijo = posibleHijo.getKey();
+                    int nivelHijo = niveles.get(idHijo);
+                    if (nivelHijo == nivelPadre + 1) {
+                        hijos.add(posibleHijo.getValue());
+                        if (hijos.size() == hijosEsperados) break;
+                    }
+                }
+
+                for (int i = 0; i < hijos.size(); i++) {
+                    padre.childs.set(i, hijos.get(i));
+                }
+            }
+
+            //verificar que el árbol cumple propiedades del BTree
+            if (!verificarPropiedadesBTree(raiz, orden)) {
+                throw new ItemNoFound("El árbol no cumple con las propiedades de un BTree válido.");
+            }
+
+            arbol.root = raiz;
+            return arbol;
+
+        } catch (IOException | NumberFormatException e) {
+            throw new ItemNoFound("Error procesando el archivo: " + e.getMessage());
+        }
     }
+
+
 }
