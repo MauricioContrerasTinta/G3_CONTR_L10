@@ -304,4 +304,11 @@ public class BTree<E extends Comparable<E>> {
         parent.count--;
     }
 
+    public static BTree<Integer> building_Btree(String rutaArchivo) throws ItemNoFound{
+        Map<Integer, BNode<Integer>> nodosPorId = new HashMap<>();
+        Map<Integer, Integer> niveles = new HashMap<>();
+        BNode<Integer> raiz = null;
+
+        
+    }
 }
