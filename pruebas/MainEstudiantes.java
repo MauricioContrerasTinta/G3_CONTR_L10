@@ -22,7 +22,10 @@ public class MainEstudiantes {
 
         System.out.println("Buscar 115: " + arbol.buscarNombre(115)); 
         System.out.println("Buscar 132: " + arbol.buscarNombre(132));  
-        System.out.println("Buscar 999: " + arbol.buscarNombre(999));  
+        System.out.println("Buscar 999: " + arbol.buscarNombre(999));
+        
+         arbol.remove(new RegistroEstudiante(101, ""));
+
     }
 }
 
