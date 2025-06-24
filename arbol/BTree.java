@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import excepciones.ItemNoFound;
+import modelo.RegistroEstudiante;
 
 public class BTree<E extends Comparable<E>> {
     private BNode<E> root;
@@ -401,5 +402,29 @@ public class BTree<E extends Comparable<E>> {
 
     private static boolean esRaiz(BNode<?> nodo) {
         return nodo.getIdNode() == 0; // Asumiendo que el ID de la raíz es 0
+    }
+
+    //EJERCICIO 4
+
+    public String buscarNombre(int codigo) {
+        return buscarNombreRecursivo(root, codigo);
+    }
+
+    private String buscarNombreRecursivo(BNode<E> nodo, int codigo) {
+        if (nodo == null) return "No encontrado";
+
+        for (int i = 0; i < nodo.count; i++) {
+            E actual = nodo.keys.get(i);
+            if (actual instanceof modelo.RegistroEstudiante) {
+                modelo.RegistroEstudiante estudiante = (modelo.RegistroEstudiante) actual;
+
+                if (estudiante.getCodigo() == codigo) {
+                    return estudiante.getNombre();
+                } else if (codigo < estudiante.getCodigo()) {
+                    return buscarNombreRecursivo(nodo.childs.get(i), codigo);
+                }
+            }
+        }
+        return buscarNombreRecursivo(nodo.childs.get(nodo.count), codigo);
     }
 }
