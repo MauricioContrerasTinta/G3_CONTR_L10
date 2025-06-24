@@ -162,4 +162,50 @@ public class BTree<E extends Comparable<E>> {
             }
         }
     }
+
+    private boolean remove(BNode<E> node, E cl) {
+        int[] pos = new int[1];
+        boolean found = node.searchNode(cl, pos);
+
+        if (found) {
+            if (esHoja(node)) {
+                //clave en hoja
+                for (int i = pos[0]; i < node.count - 1; i++) {
+                    node.keys.set(i, node.keys.get(i + 1));
+                }
+                node.keys.set(node.count - 1, null);
+                node.count--;
+            } else {
+                //clave en nodo interno
+                BNode<E> predNode = node.childs.get(pos[0]);
+                if (predNode.count >= orden / 2) {
+                    E pred = getPredecesor(predNode);
+                    node.keys.set(pos[0], pred);
+                    remove(predNode, pred);
+                } else {
+                    BNode<E> succNode = node.childs.get(pos[0] + 1);
+                    if (succNode.count >= orden / 2) {
+                        E succ = getSucesor(succNode);
+                        node.keys.set(pos[0], succ);
+                        remove(succNode, succ);
+                    } else {
+                        merge(node, pos[0]);
+                        remove(predNode, cl);
+                    }
+                }
+            }
+        } else {
+            if (esHoja(node)) {
+                System.out.println("no encontrada.");
+                return false;
+            }
+
+            BNode<E> child = node.childs.get(pos[0]);
+            if (child.count < orden / 2) {
+                fixChild(node, pos[0]);
+            }
+            remove(node.childs.get(pos[0]), cl);
+        }
+        return true;
+    }
 }
